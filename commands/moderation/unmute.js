@@ -8,8 +8,7 @@ module.exports = {
     usage: 'unmute [@membre]',
     examples: ['unmute @Flo',],
     description : 'unmute un utilisateur du Discord',
-    async run(client, message, args) { 
-        const fetchGuild = await client.getGuild(member.guild);
+    async run(client, message, args, guildSettings) {
         if(!args[0]) return message.reply("Spécifier un \`MEMBRE\` à unmute !");
 
         const target = message.mentions.members.find(m => m.id);
@@ -27,7 +26,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur peut de nouveau parler!'})
 
 
-    const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+    const logChannel = guildSettings.logChannel
     logChannel.send({embeds : [embed]});
 
     },
@@ -39,8 +38,7 @@ module.exports = {
             required: true      
         }
     ],
-    async runInteraction (client, interaction) {
-        const fetchGuild = await client.getGuild(member.guild);
+    async runInteraction (client, interaction, guildSettings) {
         const target = interaction.options.getMember('target');
 
         if(!target.isCommunicationDisabled()) return interaction.reply('Ce membre ne peut pas être unmute par le bot car il n\'est pas mute!')
@@ -56,7 +54,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur peut de nouveau parler!'})
 
 
-        const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+        const logChannel = guildSettings.logChannel
         logChannel.send({embeds : [embed]});
     },
 };

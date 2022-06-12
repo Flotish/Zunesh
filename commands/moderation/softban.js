@@ -8,8 +8,7 @@ module.exports = {
     usage: 'softban [@membre] [duration] [reason]',
     examples: ['softban @Flo 4 raison',],
     description : 'bannis un utilisateur du Discord temporairement avec une raison',
-    async run(client, message, args) { 
-        const fetchGuild = await client.getGuild(member.guild);
+    async run(client, message, args, guildSettings) {
         if(!args[0]) return message.reply("Spécifier un \`MEMBRE\` à bannis !")
         if(isNaN(args[1]) || !args[1] || args[1] > 7 || args[1] < 1) return message.reply("Spécifier une durée pour votre ban (entre 1 et 7 jours)")
         if(!args[2]) return message.reply("Spécifier une \`RAISON\` à votre bannissement !")
@@ -33,7 +32,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur à été bannis temporairement!'})
 
 
-    const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+    const logChannel = guildSettings.logChannel
     logChannel.send({embeds : [embed]});
 
     },
@@ -59,8 +58,7 @@ module.exports = {
             required: true     
         },
     ],
-    async runInteraction (client, interaction) {
-        const fetchGuild = await client.getGuild(member.guild);
+    async runInteraction (client, interaction, guildSettings) {
         const target = interaction.options.getMember('target');
         const duration = interaction.options.getNumber('duration');
         const reason = interaction.options.getString('reason');
@@ -80,7 +78,7 @@ module.exports = {
             .setFooter({text: 'L\'utilisateur à été bannis temporairement!'})
 
 
-        const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+        const logChannel = guildSettings.logChannel
         logChannel.send({embeds : [embed]});
     },
 };

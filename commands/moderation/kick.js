@@ -8,8 +8,7 @@ module.exports = {
     usage: 'kick [@membre]  [reason]',
     examples: ['kick @Flo raison',],
     description : 'Expulser un utilisateur du Discord avec une raison',
-    async run(client, message, args) { 
-        const fetchGuild = await client.getGuild(member.guild);
+    async run(client, message, args, guildSettings) { 
         if(!args[0]) return message.reply("Spécifier un \`MEMBRE\` à expulser !")
         if(!args[1]) return message.reply("Spécifier une \`RAISON\` à votre expulsion !")
 
@@ -30,7 +29,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur à été kick!'})
 
 
-    const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+    const logChannel = guildSettings.logChannel
     logChannel.send({embeds : [embed]});
 
     },
@@ -48,8 +47,7 @@ module.exports = {
             required: true     
         },
     ],
-    async runInteraction (client, interaction) {
-        const fetchGuild = await client.getGuild(member.guild);
+    async runInteraction (client, interaction, guildSettings) {
         const target = interaction.options.getMember('target');
         const reason = interaction.options.getString('reason');
 
@@ -67,7 +65,7 @@ module.exports = {
             .setFooter({text: 'L\'utilisateur à été kick!'})
 
 
-        const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+        const logChannel = guildSettings.logChannel
         logChannel.send({embeds : [embed]});
 
     },

@@ -8,8 +8,7 @@ module.exports = {
     usage: 'thread [join|leave|archive|unarchive|delete]',
     examples: ['thread join', 'thread leave',],
     description : 'Commande concernant les threads',
-    async run(client, message, args) {
-        const fetchGuild = await client.getGuild(member.guild);
+    async run(client, message, args, guildSettings) {
         let thread = message.channel;
         if(!thread.isThread()) return message.reply("Impossible d'effectuer cette commande hors d'un thread");
 
@@ -30,7 +29,7 @@ module.exports = {
         }else if(args[0] === 'delete'){
             const channelId = args[1];
             if(!args[1]) return message.reply('Merci de spécifier un ID de channel !')
-            const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+            const logChannel = guildSettings.logChannel
             await logChannel.send(`Le bot a supprimé le thread : ${thread.name} !`);
             await thread.delete();
         }
@@ -63,8 +62,7 @@ module.exports = {
             options: [{name: 'channel', type : 'STRING', description: 'Id du channel', required : true}]
         },
     ],
-    async runInteraction (client, interaction) {
-        const fetchGuild = await client.getGuild(member.guild);
+    async runInteraction (client, interaction, guildSettings) {
         let thread = interaction.channel;
         if(!thread.isThread()) return interaction.reply("Impossible d'effectuer cette commande hors d'un thread");
 
@@ -82,7 +80,7 @@ module.exports = {
             await thread.setArchived(false);
         }else if(interaction.options.getSubcommand() === 'delete'){
             const channelId = interaction.options.getString('channel');
-            const logChannel = client.channels.cache.get(fetchGuild.logChannel);
+            const logChannel = guildSettings.logChannel
             await logChannel.send(`Le bot a supprimé le thread : ${thread.name} !`);
             await thread.delete();
         }
