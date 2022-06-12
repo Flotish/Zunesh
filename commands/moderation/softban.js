@@ -32,7 +32,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur à été bannis temporairement!'})
 
 
-    const logChannel = guildSettings.logChannel
+    const logChannel = client.channels.cache.get(guildSettings.logChannel);
     logChannel.send({embeds : [embed]});
 
     },
@@ -78,7 +78,7 @@ module.exports = {
             .setFooter({text: 'L\'utilisateur à été bannis temporairement!'})
 
 
-        const logChannel = guildSettings.logChannel
+        const logChannel = client.channels.cache.get(guildSettings.logChannel);
         logChannel.send({embeds : [embed]});
     },
 };

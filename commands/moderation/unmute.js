@@ -26,7 +26,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur peut de nouveau parler!'})
 
 
-    const logChannel = guildSettings.logChannel
+    const logChannel = client.channels.cache.get(guildSettings.logChannel);
     logChannel.send({embeds : [embed]});
 
     },
@@ -54,7 +54,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur peut de nouveau parler!'})
 
 
-        const logChannel = guildSettings.logChannel
+        const logChannel = client.channels.cache.get(guildSettings.logChannel);
         logChannel.send({embeds : [embed]});
     },
 };

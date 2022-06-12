@@ -29,7 +29,7 @@ module.exports = {
         }else if(args[0] === 'delete'){
             const channelId = args[1];
             if(!args[1]) return message.reply('Merci de spécifier un ID de channel !')
-            const logChannel = guildSettings.logChannel
+            const logChannel = client.channels.cache.get(guildSettings.logChannel);
             await logChannel.send(`Le bot a supprimé le thread : ${thread.name} !`);
             await thread.delete();
         }
@@ -80,7 +80,7 @@ module.exports = {
             await thread.setArchived(false);
         }else if(interaction.options.getSubcommand() === 'delete'){
             const channelId = interaction.options.getString('channel');
-            const logChannel = guildSettings.logChannel
+            const logChannel = client.channels.cache.get(guildSettings.logChannel);
             await logChannel.send(`Le bot a supprimé le thread : ${thread.name} !`);
             await thread.delete();
         }
