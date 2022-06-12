@@ -10,6 +10,7 @@ module.exports = {
     examples: ['mute @Flo 4 minutes raison',],
     description : 'mute un utilisateur du Discord temporairement avec une raison',
     async run(client, message, args) { 
+        const fetchGuild = await client.getGuild(member.guild);
         if(!args[0]) return message.reply("Spécifier un \`MEMBRE\` à mute !")
         if(!args[1] || !args[2]) return message.reply("Spécifier une durée pour votre mute")
         if(!args[3]) return message.reply("Spécifier une \`RAISON\` à votre mute !")
@@ -60,7 +61,7 @@ module.exports = {
         },
     ],
     async runInteraction (client, interaction) {
-
+        const fetchGuild = await client.getGuild(member.guild);
         const target = interaction.options.getMember('target');
         const duration = interaction.options.getString('duration');
         const convertedTime = ms(duration);

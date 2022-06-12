@@ -9,6 +9,7 @@ module.exports = {
     examples: ['ban @Flo raison',],
     description : 'bannis un utilisateur du Discord avec une raison',
     async run(client, message, args) { 
+        const fetchGuild = await client.getGuild(member.guild);
         if(!args[0]) return message.reply("Spécifier un \`MEMBRE\` à bannis !")
         if(!args[1]) return message.reply("Spécifier une \`RAISON\` à votre bannissement !")
 
@@ -48,7 +49,7 @@ module.exports = {
         },
     ],
     async runInteraction (client, interaction) {
-
+        const fetchGuild = await client.getGuild(member.guild);
         const target = interaction.options.getMember('target');
         const reason = interaction.options.getString('reason');
 

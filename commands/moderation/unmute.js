@@ -9,6 +9,7 @@ module.exports = {
     examples: ['unmute @Flo',],
     description : 'unmute un utilisateur du Discord',
     async run(client, message, args) { 
+        const fetchGuild = await client.getGuild(member.guild);
         if(!args[0]) return message.reply("Spécifier un \`MEMBRE\` à unmute !");
 
         const target = message.mentions.members.find(m => m.id);
@@ -39,7 +40,7 @@ module.exports = {
         }
     ],
     async runInteraction (client, interaction) {
-
+        const fetchGuild = await client.getGuild(member.guild);
         const target = interaction.options.getMember('target');
 
         if(!target.isCommunicationDisabled()) return interaction.reply('Ce membre ne peut pas être unmute par le bot car il n\'est pas mute!')

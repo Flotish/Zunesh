@@ -5,14 +5,15 @@ module.exports = {
     category: 'thread',
     permissions: ['MANAGE_THREADS'],
     ownerOnly: false,
-    usage: 'thread [Join|leave|archive|unarchive|delete]',
+    usage: 'thread [join|leave|archive|unarchive|delete]',
     examples: ['thread join', 'thread leave',],
     description : 'Commande concernant les threads',
     async run(client, message, args) {
+        const fetchGuild = await client.getGuild(member.guild);
         let thread = message.channel;
         if(!thread.isThread()) return message.reply("Impossible d'effectuer cette commande hors d'un thread");
 
-        if(!args[0] || !args[0].match(/^(Join|leave|archive|unarchive|delete)$/)) return message.reply('Merci d\'entrer un événement valide (\`Join`\/\`leave`\/\`archive`\/\`unarchive`\/\`delete`\)');
+        if(!args[0] || !args[0].match(/^(join|leave|archive|unarchive|delete)$/)) return message.reply('Merci d\'entrer un événement valide (\`join`\/\`leave`\/\`archive`\/\`unarchive`\/\`delete`\)');
 
         if(args[0] === 'join'){
             message.reply('Le bot a rejoint le thread !');
@@ -63,6 +64,7 @@ module.exports = {
         },
     ],
     async runInteraction (client, interaction) {
+        const fetchGuild = await client.getGuild(member.guild);
         let thread = interaction.channel;
         if(!thread.isThread()) return interaction.reply("Impossible d'effectuer cette commande hors d'un thread");
 
