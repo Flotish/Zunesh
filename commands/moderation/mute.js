@@ -35,7 +35,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur à été muter!'})
 
 
-    const logChannel = guildSettings.logChannel
+    const logChannel = guildSettings.logChannel.id
     logChannel.send({embeds : [embed]});
 
     },
@@ -81,7 +81,7 @@ module.exports = {
         .setFooter({text: 'L\'utilisateur à été muter!'})
 
 
-        const logChannel = guildSettings.logChannel
+        const logChannel = guildSettings.logChannel.id
         logChannel.send({embeds : [embed]});
     },
 };
