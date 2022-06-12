@@ -3,7 +3,7 @@ module.exports = {
     once : false,
     async execute(client, thread){
         if(thread.isText()) thread.join();
-        const logChannel = client.channels.cache.get('949253797119684608');
+        const logChannel = client.channels.cache.get(fetchGuild.logChannel);
         logChannel.send(`Nom du thread: ${thread.name} !`);
     }
 };

@@ -66,7 +66,7 @@ module.exports = {
             .setFooter({text: 'L\'utilisateur à été kick!'})
 
 
-        const logChannel = client.channels.cache.get('949253797119684608');
+        const logChannel = client.channels.cache.get(fetchGuild.logChannel);
         logChannel.send({embeds : [embed]});
 
     },
