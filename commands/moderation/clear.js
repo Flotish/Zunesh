@@ -36,6 +36,8 @@ module.exports = {
                 📃 Personne clear: ${target}`)
                 .setTimestamp()
                 .setFooter({text: `${amountToDelete} messages supprimé`})
+                const logChannel = client.channels.cache.get(guildSettings.logChannel);
+                 logChannel.send({embeds : [embed]});
             })
         } else {
             await message.channel.bulkDelete(amountToDelete, true).then(messages =>{
@@ -47,11 +49,10 @@ module.exports = {
                 .setDescription(`🧹 Modérateur du clear : ${message.author.tag}`)
                 .setTimestamp()
                 .setFooter({text: `${amountToDelete} messages supprimé`})
+                const logChannel = client.channels.cache.get(guildSettings.logChannel);
+                 logChannel.send({embeds : [embed]});
             })
         }
-    const logChannel = client.channels.cache.get(guildSettings.logChannel);
-    logChannel.send({embeds : [embed]});
-
     },
     options: [
         {
@@ -94,6 +95,8 @@ module.exports = {
                 📃 Personne clear: ${target}`)
                 .setTimestamp()
                 .setFooter({text: `${amountToDelete} messages supprimé`})
+                const logChannel = client.channels.cache.get(guildSettings.logChannel);
+                 logChannel.send({embeds : [embed]});
          })
         } else {
             await interaction.channel.bulkDelete(amountToDelete, true).then(messages =>{
@@ -105,6 +108,8 @@ module.exports = {
                 .setDescription(`🧹 Modérateur du clear : ${interaction.user.tag}`)
                 .setTimestamp()
                 .setFooter({text: `${amountToDelete} messages supprimé`})
+                const logChannel = client.channels.cache.get(guildSettings.logChannel);
+                 logChannel.send({embeds : [embed]});
             })
         }
     const logChannel = client.channels.cache.get(guildSettings.logChannel);
