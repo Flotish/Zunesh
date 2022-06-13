@@ -3,7 +3,7 @@ const { Guild } = require('../../models/index')
 module.exports = {
     name : 'reload',
     category: 'admin',
-    permissions: [' '],
+    permissions: ['MANAGE_MESSAGES'],
     ownerOnly: true,
     usage: 'reload',
     examples: ['reload'],

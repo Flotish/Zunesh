@@ -3,7 +3,7 @@ const { Guild } = require('../../models/index')
 module.exports = {
     name : 'update',
     category: 'admin',
-    permissions: [' '],
+    permissions: ['MANAGE_MESSAGES'],
     ownerOnly: true,
     usage: 'update',
     examples: ['update'],

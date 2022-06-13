@@ -1,7 +1,7 @@
 module.exports = {
     name : 'emit',
     category: 'admin',
-    permissions: [' '],
+    permissions: ['MANAGE_MESSAGES'],
     ownerOnly: true,
     usage: 'emit [EventName]',
     examples: ['emit','emit guildCreate'],

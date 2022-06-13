@@ -11,8 +11,8 @@ module.exports = {
 
         client.user.setPresence({activities: [{ name: 'Flotish', type: 'LISTENING' }], status: 'dnd'})
 
-        //const devGuild = await client.guilds.cache.get('808421203572031558');
-        //devGuild.commands.set(client.commands.map(cmd => cmd));
+        const devGuild = await client.guilds.cache.get('808421203572031558');
+        devGuild.commands.set(client.commands.map(cmd => cmd));
         // Slash commands sur serveur = instantané
         // Slach commands en globa l= 1h
         client.application.commands.set(client.commands.map(cmd => cmd));

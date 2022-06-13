@@ -1,7 +1,7 @@
 module.exports = {
     name : 'dbconfig',
     category: 'admin',
-    permissions: [' '],
+    permissions: ['MANAGE_MESSAGES'],
     ownerOnly: true,
     usage: 'dbconfig [key] <value>',
     examples: ['dbconfig prefix','dbconfig prefix ?'],

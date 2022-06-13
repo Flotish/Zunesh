@@ -1,3 +1,5 @@
+const { MessageEmbed} = require('discord.js');
+
 module.exports = {
     name : 'clear',
     category: 'moderation',
@@ -22,17 +24,33 @@ module.exports = {
             (await messagesToDelete).filter(msg => {
                 if(msg.author.id == target.id && amountToDelete > i) {
                     filteredTargetMessages.push(msg); i++
-                }
+                }  
             });
-
             await message.channel.bulkDelete(filteredTargetMessages, true).then(messages =>{
                 message.channel.send(`j'ai supprimé ${messages.size} messages sur l'utilisateur ${target} !`);
+                
+                const embed = new MessageEmbed()
+                .setAuthor({name : `clear : ${amountToDelete} messages de ${target}`})
+                .setColor('#0CDACD')
+                .setDescription(`🧹 Modérateur du clear : ${message.author.tag}
+                📃 Personne clear: ${target}`)
+                .setTimestamp()
+                .setFooter({text: `${amountToDelete} messages supprimé`})
             })
         } else {
             await message.channel.bulkDelete(amountToDelete, true).then(messages =>{
                 message.channel.send(`j'ai supprimé ${messages.size} messages sur ce salon !`);
+
+                const embed = new MessageEmbed()
+                .setAuthor({name : `clear : ${amountToDelete} messages`})
+                .setColor('#0CDACD')
+                .setDescription(`🧹 Modérateur du clear : ${message.author.tag}`)
+                .setTimestamp()
+                .setFooter({text: `${amountToDelete} messages supprimé`})
             })
         }
+    const logChannel = client.channels.cache.get(guildSettings.logChannel);
+    logChannel.send({embeds : [embed]});
 
     },
     options: [
@@ -68,11 +86,28 @@ module.exports = {
 
             await interaction.channel.bulkDelete(filteredTargetMessages, true).then(messages =>{
                 interaction.reply(`j'ai supprimé ${messages.size} messages sur l'utilisateur ${target} !`);
-            })
+                
+                const embed = new MessageEmbed()
+                .setAuthor({name : `clear : ${amountToDelete} messages de ${target}`})
+                .setColor('#0CDACD')
+                .setDescription(`🧹 Modérateur du clear : ${interaction.user.tag}
+                📃 Personne clear: ${target}`)
+                .setTimestamp()
+                .setFooter({text: `${amountToDelete} messages supprimé`})
+         })
         } else {
             await interaction.channel.bulkDelete(amountToDelete, true).then(messages =>{
                 interaction.reply(`j'ai supprimé ${messages.size} messages sur ce salon !`);
+                
+                const embed = new MessageEmbed()
+                .setAuthor({name : `clear : ${amountToDelete}}`})
+                .setColor('#0CDACD')
+                .setDescription(`🧹 Modérateur du clear : ${interaction.user.tag}`)
+                .setTimestamp()
+                .setFooter({text: `${amountToDelete} messages supprimé`})
             })
         }
+    const logChannel = client.channels.cache.get(guildSettings.logChannel);
+    logChannel.send({embeds : [embed]});
     },
 }; 
