@@ -8,7 +8,7 @@ module.exports = {
     usage: 'clear [amount] <@target>',
     examples: ['clear 50','clear 50 @Flo'],
     description : 'Supprimer un nombre de messages spécifier sur un salon ou un utilisateur',
-    async run(client, message, args) { 
+    async run(client, message, args, guildSettings) { 
         
         const amountToDelete = args[0];
         if(!args[0] || isNaN(amountToDelete) || amountToDelete > 100 || amountToDelete <= 1) return message.reply('le \`NOMBRE\` doit être inférieur à 100 et supérieur à 1');
@@ -67,7 +67,7 @@ module.exports = {
             required: false     
         },
     ],
-    async runInteraction (client, interaction) {
+    async runInteraction (client, interaction, guildSettings) {
         const amountToDelete = interaction.options.getNumber('message');
         if(amountToDelete > 100 || amountToDelete < 0) return interaction.reply('le \`NOMBRE\` doit être inférieur à 100 et supérieur à 0');
 
